@@ -6,7 +6,10 @@ module.exports = {
     node: {
       net: "empty",
       fs: "empty",
-      tls: "empty"
+      tls: "empty",
+      "child_process": "empty",
+      './types/standard': "empty",
+      './types/other': "empty"
     },
     module: {
         rules: [
@@ -20,7 +23,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['*', '.js', '.jsx', '.json']
     },
     output: {
         path: path.join(__dirname, "public"),

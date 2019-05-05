@@ -13,6 +13,7 @@ utils.getRecipes().then(content => {
     app.get('/scrape', (req, res) => {
         res.send({recipe: content});
     });
+    console.log(content);
 });
 
 

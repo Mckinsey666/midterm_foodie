@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const $ = require("cheerio");
 
-export function getRecipes(){
+function getRecipes(){
   const url = "https://tasty.co";
   const index = [0, 1, 2];
   return rp(url)
@@ -15,3 +15,6 @@ export function getRecipes(){
     .catch(err => {
     });
 }
+
+export {getRecipes};
+

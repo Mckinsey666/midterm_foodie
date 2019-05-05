@@ -84,3 +84,42 @@
     width: 30%;
     height: 50px;
 }
+
+/* RecipeBox */
+
+.box-container{
+    display: flex;
+}
+
+.title-box{
+    height: 60px;
+
+}
+.image-box
+{
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* Random Recipe */
+
+.dish-title-container
+{
+    width: 100%;
+}
+
+.lower
+{
+    margin-top: 50px;
+}
+
+.right-align
+{
+    margin-left: auto;
+    margin-right: 0
+}
+
+.recipe-image
+{
+    width: 100%;
+}

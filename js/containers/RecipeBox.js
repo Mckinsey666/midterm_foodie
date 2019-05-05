@@ -1,9 +1,16 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const styles = {
 	box: {
-		height: "400px",
-	}
+		height: "300px",
+	},
+	button: {
+        width: '100%',
+        fontWeight: '1',
+		backgroundColor: 'rgb(234, 236, 239)',
+		fontFamily: "Bree Serif"
+    },
 }
 class RecipeBox extends React.Component {
     render(){
@@ -13,10 +20,26 @@ class RecipeBox extends React.Component {
 					<a href="#" className="image featured"><img src={this.props.item.img} alt="" /></a>
 					<div style={styles.box} className="inner">
 						<header>
-							<h2>{this.props.item.title}</h2>
-							<a href={this.props.item.link}><img src="/public/images/tasty-logo.png" /></a>
+							<div className="title-box">
+								<h2>{this.props.item.title}</h2>
+							</div>
+							<div className="box-container">
+								<div className="image-box">
+									<a 
+										href={this.props.item.link} 
+										className="image featured"
+									>
+										<img src="images/tasty-logo.jpg" alt="" />
+									</a>
+								</div>
+							</div>
 						</header>
-						<p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
+						<Button 
+							variant="contained"
+							style={styles.button}
+                        >
+                            View Recipe and Save
+                        </Button>
 					</div>
 				</section>
 			</div>

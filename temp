@@ -38,3 +38,33 @@
 						</div>
 					</div>
 				</div>
+
+
+import React from 'react';
+import logo from '../../public/images/pic01.jpg';
+
+const styles = {
+	box: {
+		height: "400px",
+	}
+}
+class RecipeBox extends React.Component {
+    render(){
+        return(
+            <div className="col-4 col-12-medium">
+			    <section className="box feature">
+					<a href="#" className="image featured"><img src={this.props.item.img} alt="" /></a>
+					<div style={styles.box} className="inner">
+						<header>
+							<h2>{this.props.item.title}</h2>
+							<a href="#" className="image featured"><img src="images/tasty-logo.jpg" alt="" /></a>
+						</header>
+						<p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
+					</div>
+				</section>
+			</div>
+        );
+    }
+}
+
+export default RecipeBox;
