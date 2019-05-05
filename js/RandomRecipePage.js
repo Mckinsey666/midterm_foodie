@@ -1,10 +1,7 @@
 import React from 'react';
 import Header from './containers/Header';
-import DragDropRecipe from './containers/DragDropRecipe';
-import SelectIngredients from './containers/SelectIngredients';
 import {LocalDrink, RestaurantMenu} from '@material-ui/icons';
 import AvatarTitle from './containers/AvatarTitle';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import RecipeTitle from './containers/RecipeTitle';
 import List from '@material-ui/core/List';
@@ -22,10 +19,10 @@ const styles = {
         fontWeight: '1',
 		backgroundColor: 'rgb(239, 239, 237)',
 		width: '100%',
-		height: '100%',
+        height: '100%',
+        marginTop: "50px",
 	},
     card: {
-        height: "60px",
         width: "90%",
         margin: "0 auto",
         marginTop: "10px",
@@ -80,12 +77,45 @@ function StaticIngredient(props) {
 class RandomRecipePage extends React.Component {
 
 	constructor(props){
-		super(props);
+        super(props);
+        this.state = {
+            steps: [],
+            ingredients: []
+        }
     }
     
 	handleSave = () => {
 		
 	}
+
+    componentDidMount(){
+        this.callBackend()
+        .then(res => {
+            this.setState({
+                steps: res.content.steps,
+                ingredients: res.content.ingredients
+            });
+        })
+        .catch(err => console.log(err));
+    }
+
+    callBackend = async ()=>{
+        const payload = {
+            method: 'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({link: this.props.item.link}),
+        };
+        const response = await fetch('/getrecipe');
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message) 
+          }
+        return body;
+    };
 
     render(){
         return(
@@ -106,16 +136,21 @@ class RandomRecipePage extends React.Component {
 												/>
 											</div>
 										</div>
-										<Button
-											variant="contained"
-											style={styles.button}
-										>
-											Save Recipe
+                                        <List style={{maxHeight: "500px", overflow: 'auto'}}>
+                                            {this.state.steps.map((item, idx)=>(
+                                                <Ingredient item={item} key={idx}/>
+                                            ))}
+                                        </List>
+                                        <Button
+                                            variant="contained"
+                                            style={styles.button}
+                                        >
+                                            Save Recipe
 										</Button>
 									</article>
 								</div>
 							</div>
-                            <StaticIngredient list={[""]}/>
+                            <StaticIngredient list={this.state.ingredients}/>
 						</div>
 					</div>
 				</div>

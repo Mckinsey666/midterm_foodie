@@ -16,5 +16,20 @@ function getRecipes(){
     });
 }
 
-export {getRecipes};
+function parseRecipes(url){
+  return rp(url)
+    .then(html => {
+      const ingredients = [];
+      $('.ingredients__section li', html).each((i, item) => {
+        const str = $(item).text().split('\n').map(str => str.trim()).filter(str => str !== "").join(' ');
+        ingredients.push(str);
+      });
+      const steps = $(".prep ol", html).text().split('\n').map(str => str.trim()).filter(str => str !== "");
+      return {ingredients: ingredients, steps: steps};
+    })
+    .catch(err => {});
+}
+
+export {getRecipes, parseRecipes};
+
 

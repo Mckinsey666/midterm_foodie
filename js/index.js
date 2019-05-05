@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import HomePage from './HomePage';
 import CreateRecipePage from './CreateRecipePage';
 import RandomRecipePage from './RandomRecipePage';
+import SavedRecipePage from './SavedRecipePage';
 
 const recipe = { 
     link: 'https://tasty.co/recipe/easy-shrimp-ceviche',

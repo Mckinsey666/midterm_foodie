@@ -4,7 +4,6 @@ import Banner from './containers/Banner';
 import RandomRecipeColumn from './containers/RandomRecipeColumn';
 import Footer from './containers/Footer';
 import * as utils from './utils.js';
-import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
 class HomePage extends React.Component {
     constructor(props){

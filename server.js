@@ -9,11 +9,17 @@ app.use(express.static('public'));
 
 app.listen(PORT, () => console.log("app listening on port " + PORT.toString()));
 
-utils.getRecipes().then(content => {
-    app.get('/scrape', (req, res) => {
+
+app.get('/scrape', (req, res) => {
+    utils.getRecipes().then(content => {
         res.send({recipe: content});
-    });
-    console.log(content);
+    })
 });
 
 
+app.get('/getrecipe', (req, res) => {
+    //console.log(req.body);
+    utils.parseRecipes('https://tasty.co/recipe/grilled-pound-cake-with-berries').then(content => {
+        res.send({content: content});
+    });
+})

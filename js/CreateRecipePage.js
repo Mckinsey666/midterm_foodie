@@ -13,8 +13,16 @@ const styles = {
 		width: "100%",
 	},
 	button: {
-        fontWeight: '1',
+    fontWeight: '1',
 		backgroundColor: 'rgb(239, 239, 237)',
+		width: '100%',
+		height: '100%',
+	},
+	clearButton: {
+		fontWeight: '10',
+		fontFamily: "Bree Serif",
+		backgroundColor: 'rgb(252, 58, 152)',
+		color: "white",
 		width: '100%',
 		height: '100%',
 	},
@@ -78,6 +86,22 @@ class CreateRecipePage extends React.Component {
 		}));
 	}
 
+	handleClear = () => {
+		this.setState({
+			uid: 0
+		});
+		this.ingredientList.current.setState({
+			list: []
+		});
+		this.dishName.current.setState({
+			value: "",
+		});
+		this.recipe.current.setState({
+			items: [],
+			refs: []
+		});
+	}
+
 	handleSave = () => {
 		const steps = this.recipe.current.state.refs.map(item => item.current.state.value).filter(item => item != "");
 		const ingredients = this.ingredientList.current.state.list.filter(item => item.ingredient != "");
@@ -87,7 +111,7 @@ class CreateRecipePage extends React.Component {
 			ingredients: ingredients,
 			steps: steps
 		}
-		//console.log(recipe);
+		console.log(recipe);
 	}
 
     render(){
@@ -129,7 +153,7 @@ class CreateRecipePage extends React.Component {
 											</Button>
 											</div>
 										</div>
-                                        <DragDropRecipe ref={this.recipe}/>
+										<DragDropRecipe ref={this.recipe}/>
 										<Button 
 											onClick={this.handleSave}
 											variant="contained"
@@ -137,10 +161,17 @@ class CreateRecipePage extends React.Component {
 										>
 											Save Recipe
 										</Button>
+										<Button 
+											onClick={this.handleClear}
+											variant="contained"
+											style={styles.clearButton}
+										>
+											Clear
+										</Button>
 									</article>
 								</div>
 							</div>
-                            <SelectIngredients ref={this.ingredientList}/>
+              <SelectIngredients ref={this.ingredientList}/>
 						</div>
 					</div>
 				</div>
