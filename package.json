@@ -1,0 +1,42 @@
+{
+  "name": "web-midterm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack-dev": "./node_modules/.bin/webpack --mode development --watch",
+    "start": "nodemon --exec babel-node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.16.4",
+    "puppeteer": "^1.15.0",
+    "react": "^16.8.6",
+    "react-beautiful-dnd": "^11.0.2",
+    "react-dom": "^16.8.6",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "nodemon": "^1.19.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
