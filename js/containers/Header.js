@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink, Switch, Route } from 'react-router-dom'
 
 const styles = {
 	button: {
@@ -18,9 +17,9 @@ class Header extends React.Component {
 					</div>
 						<nav id="nav">
 							<ul>
-								<li><NavLink to="/createrecipe" >My Recipes</NavLink></li>
-								<li><NavLink to="/createrecipe" >Create Recipe</NavLink></li>
-								<li><NavLink to="/createrecipe" >Feeling Lucky</NavLink></li>
+								<li><a href="" onClick={this.props.onClick.myrecipe}>My Recipes</a></li>
+								<li><a href="" onClick={this.props.onClick.createrecipe}>Create Recipe</a></li>
+								<li><a href="" onClick={this.props.onClick.feelinglucky}>Feeling Lucky</a></li>
 								<li>
                                     <input 
                                         type="text"

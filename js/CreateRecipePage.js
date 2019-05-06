@@ -139,7 +139,7 @@ class CreateRecipePage extends React.Component {
     render(){
         return(
             <div id="page-wrapper">
-                <Header />
+                <Header onClick={this.props.onClick}/>
 			    <div id="main-wrapper">
 					<div className="container">
 						<div className="row gtr-200">

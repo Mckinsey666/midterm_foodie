@@ -151,7 +151,7 @@ class RecipePage extends React.Component {
     render(){
         return(
             <div id="page-wrapper">
-                <Header />
+                <Header onClick={this.props.onClick}/>
 			    <div id="main-wrapper">
                     <RecipeTitle name={this.props.item.title} img={this.props.item.img}/>
 					<div className="container lower">

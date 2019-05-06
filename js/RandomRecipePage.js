@@ -36,7 +36,7 @@ class RandomRecipePage extends React.Component{
 
     render(){
         return(
-            <RecipePage item={this.state.content} />
+            <RecipePage item={this.state.content} onClick={this.props.onClick}/>
         );
     }
 }
