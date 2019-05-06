@@ -39,7 +39,7 @@ class App extends React.Component {
                 myrecipe: this.onClickMyRecipe}} 
             />);
         }
-        if(this.state.render == 'createrecipe'){
+        else if(this.state.render == 'createrecipe'){
             //console.log("hi!!!");
             return (<CreateRecipePage 
                 onClick={{createrecipe: this.onClickCreateRecipe, 
