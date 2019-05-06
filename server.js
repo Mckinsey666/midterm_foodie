@@ -60,3 +60,10 @@ app.post('/addrecipe', (req, res) => {
     console.log(req.body);
     res.send({content: "Recipe Added!"});
 });
+
+app.get('/getrandomrecipe', (req, res) => {
+    utils.getRandomRecipe().then(content => {
+        console.log(content);
+        res.send({recipe: content})
+    }).catch(err => console.log(err));
+});

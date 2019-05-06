@@ -36,12 +36,15 @@ function getRandomRecipe(){
     .then(html => {
       const feeds = $('.feed-item', html);
       const feed_url = feeds[Math.floor(Math.random() * feeds.length).toString()].attribs.href;
+      console.log(feed_url);
       return rp(feed_url)
         .then(html => {
           const recipes = $('.feed-item', html);
           const idx = Math.floor(Math.random() * recipes.length).toString();
+          //console.log(recipes.length);
+          //console.log($(".feed-item__img", html).length);
           const recipe_url = recipes[idx].attribs.href;
-          const content = ['src', 'alt'].map(tag => $(".feed-item__img", html)[idx].attribs[tag]);
+          const content = ['src', 'alt'].map(tag => $(".feed-item__img", html)[Math.floor(2 * idx)].attribs[tag]);
           return {link: recipe_url, img: content[0], title: content[1]};
         })
         .catch(err => console.log(err));
@@ -49,8 +52,8 @@ function getRandomRecipe(){
     .catch(err => console.log(err));
 }
 
-getRandomRecipe().then(content => console.log(content)).catch(err => console.log(err));
+//getRandomRecipe().then(content => console.log(content)).catch(err => console.log(err));
 
-//export {getRecipes, parseRecipes};
+export {getRecipes, parseRecipes, getRandomRecipe};
 
 
