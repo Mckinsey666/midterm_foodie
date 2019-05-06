@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './containers/Header';
 import Banner from './containers/Banner';
 import RandomRecipeColumn from './containers/RandomRecipeColumn';
+import CreateRecipePage from './CreateRecipePage';
 import Footer from './containers/Footer';
 import * as utils from './utils.js';
 
@@ -37,7 +38,7 @@ class HomePage extends React.Component {
         console.log(this.state.recipe);
         return(
             <div id="page-wrapper">
-			    <Header />
+			    <Header/>
                 <Banner />
                 <RandomRecipeColumn recipe={this.state.recipe}/>
 				{/*<Footer />*/}

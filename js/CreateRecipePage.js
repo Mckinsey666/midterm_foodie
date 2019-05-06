@@ -111,8 +111,30 @@ class CreateRecipePage extends React.Component {
 			ingredients: ingredients,
 			steps: steps
 		}
-		console.log(recipe);
+		this.callBackend(recipe)
+			.then(res => {
+				console.log(res.content);
+			})
+			.catch(err => console.log(err));
 	}
+
+	callBackend = async (data)=>{
+		const payload = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		};
+		const response = await fetch('/addrecipe', payload);
+		const body = await response.json();
+
+		if (response.status !== 200) {
+				throw Error(body.message) 
+			}
+		return body;
+	};
 
     render(){
         return(

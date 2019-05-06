@@ -108,7 +108,7 @@ class RandomRecipePage extends React.Component {
               },
             body: JSON.stringify({link: this.props.item.link}),
         };
-        const response = await fetch('/getrecipe');
+        const response = await fetch('/getrecipe', payload);
         const body = await response.json();
 
         if (response.status !== 200) {

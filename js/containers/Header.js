@@ -1,4 +1,11 @@
 import React from 'react';
+import { NavLink, Switch, Route } from 'react-router-dom'
+
+const styles = {
+	button: {
+		width: "px",
+	}
+}
 
 class Header extends React.Component {
     render(){
@@ -11,9 +18,9 @@ class Header extends React.Component {
 					</div>
 						<nav id="nav">
 							<ul>
-								<li><a href="#">My Recipes</a></li>
-								<li><a href="#">Create Recipe</a></li>
-								<li><a href="#">Feeling Lucky</a></li>
+								<li><NavLink to="/createrecipe" >My Recipes</NavLink></li>
+								<li><NavLink to="/createrecipe" >Create Recipe</NavLink></li>
+								<li><NavLink to="/createrecipe" >Feeling Lucky</NavLink></li>
 								<li>
                                     <input 
                                         type="text"
