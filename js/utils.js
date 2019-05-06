@@ -30,6 +30,27 @@ function parseRecipes(url){
     .catch(err => {});
 }
 
-export {getRecipes, parseRecipes};
+function getRandomRecipe(){
+  const base_url = "https://tasty.co/topic/easy-dinner";
+  return rp(base_url)
+    .then(html => {
+      const feeds = $('.feed-item', html);
+      const feed_url = feeds[Math.floor(Math.random() * feeds.length).toString()].attribs.href;
+      return rp(feed_url)
+        .then(html => {
+          const recipes = $('.feed-item', html);
+          const idx = Math.floor(Math.random() * recipes.length).toString();
+          const recipe_url = recipes[idx].attribs.href;
+          const content = ['src', 'alt'].map(tag => $(".feed-item__img", html)[idx].attribs[tag]);
+          return {link: recipe_url, img: content[0], title: content[1]};
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+}
+
+getRandomRecipe().then(content => console.log(content)).catch(err => console.log(err));
+
+//export {getRecipes, parseRecipes};
 
 
