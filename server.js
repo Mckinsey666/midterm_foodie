@@ -15,8 +15,16 @@ app.listen(PORT, () => console.log("app listening on port " + PORT.toString()));
 
 
 app.get('/scrape', (req, res) => {
-    utils.getRecipes().then(content => {
-        res.send({recipe: content});
+    let content = [];
+    utils.getRandomRecipe().then(recipe => {
+        content.push(recipe);
+        utils.getRandomRecipe().then(recipe => {
+            content.push(recipe);
+            utils.getRandomRecipe().then(recipe => {
+                content.push(recipe);
+                res.send({recipe: content})
+            })
+        })
     })
 });
 
@@ -30,10 +38,11 @@ app.post('/getrecipe', (req, res) => {
 
 // MongoDB connection
 
-/*
+
 mongoose.connect('mongodb+srv://Mckinsey666:doodlebean123@webmidterm-hnka6.gcp.mongodb.net/test?retryWrites=true', {
     useNewUrlParser: true
 })
+
 
 const db = mongoose.connection;
 
@@ -54,7 +63,7 @@ db.once('open', () => {
         res.send({content: "Recipe Added!"});
     });
 });
-*/
+
 
 app.post('/addrecipe', (req, res) => {
     console.log(req.body);

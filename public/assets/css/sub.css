@@ -123,3 +123,32 @@
 {
     width: 100%;
 }
+
+/* LoginPage */
+
+.title-container
+{
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 150px;
+    height: 200px;
+    background: #ff4486;
+	color: #fff;
+	border-radius: 6px;
+	font-family: 'Oleo Script', serif;
+	font-weight: 400;
+    font-size: 10em;
+    padding-top: 0.5em;
+	letter-spacing: 0.05em;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+
+.input-field
+{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 20px;
+}
