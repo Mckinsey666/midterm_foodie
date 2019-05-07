@@ -13,7 +13,11 @@ const RecipeSchema = new Schema({
     steps: {
         type: Array,
         required: [true, 'Steps field is required.']
-    }
+	},
+	user: {
+		type: String,
+		required: [true, 'User field is required.']
+	},
 })
 
 // Creating a table within database with the defined schema

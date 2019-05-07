@@ -67,7 +67,6 @@ class HomePage extends React.Component {
     render(){
         return(
             <div id="page-wrapper">
-			    <Header onClick={this.props.onClick}/>
                 <div id="main-wrapper">
 					<div className="container">
 						<div id="content" style={styles.contentContainer}>

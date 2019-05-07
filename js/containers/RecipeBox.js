@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { NavLink } from 'react-router-dom';
 
 const styles = {
 	box: {
@@ -37,8 +38,9 @@ class RecipeBox extends React.Component {
 						<Button 
 							variant="contained"
 							style={styles.button}
+							onClick={this.props.onClick}
                         >
-                            View Recipe and Save
+                            <NavLink to="/recipe">View Recipe and Save</NavLink>
                         </Button>
 					</div>
 				</section>

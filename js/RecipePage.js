@@ -83,13 +83,16 @@ class RecipePage extends React.Component {
             ingredients: [],
             updated: false,
         }
+        this.recipeRef= React.createRef();
     }
     
 	handleSave = () => {
 		const recipe = {
             name: this.props.item.title,
             ingredients: this.state.ingredients,
-            steps: this.state.steps
+            steps: this.state.steps,
+            stars: this.recipeRef.current.ratingRef.current.state.stars,
+            user: this.props.user,
         };
         this.sendRecipe(recipe).then(res => {
             console.log(res.content);
@@ -149,11 +152,11 @@ class RecipePage extends React.Component {
     };
 
     render(){
+        console.log(this.props.item);
         return(
             <div id="page-wrapper">
-                <Header onClick={this.props.onClick}/>
 			    <div id="main-wrapper">
-                    <RecipeTitle name={this.props.item.title} img={this.props.item.img}/>
+                    <RecipeTitle ref={this.recipeRef} name={this.props.item.title} img={this.props.item.img}/>
 					<div className="container lower">
 						<div className="row gtr-200">
 							<div className="col-8 col-12-medium">

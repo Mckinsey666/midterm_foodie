@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const styles = {
 	button: {
@@ -17,16 +18,10 @@ class Header extends React.Component {
 					</div>
 						<nav id="nav">
 							<ul>
-								<li><a href="" onClick={this.props.onClick.myrecipe}>My Recipes</a></li>
-								<li><a href="" onClick={this.props.onClick.createrecipe}>Create Recipe</a></li>
-								<li><a href="" onClick={this.props.onClick.feelinglucky}>Feeling Lucky</a></li>
-								<li>
-                                    <input 
-                                        type="text"
-                                        className="input"
-                                        placeholder=" Search for Recipes"
-                                    />
-                                </li>
+								<li><a onClick={this.props.onClick.myrecipe}>My Recipes</a></li>
+								<li><a onClick={this.props.onClick.createrecipe}>Create Recipe</a></li>
+								<li><a onClick={this.props.onClick.feelinglucky}>Feeling Lucky</a></li>
+								<li><Button>Logout</Button></li>
 							</ul>
 						</nav>
 				</header>

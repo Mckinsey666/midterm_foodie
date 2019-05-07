@@ -109,7 +109,8 @@ class CreateRecipePage extends React.Component {
 		const recipe = {
 			name: name,
 			ingredients: ingredients,
-			steps: steps
+			steps: steps,
+			user: this.props.user,
 		}
 		this.callBackend(recipe)
 			.then(res => {
@@ -139,65 +140,64 @@ class CreateRecipePage extends React.Component {
     render(){
         return(
             <div id="page-wrapper">
-                <Header onClick={this.props.onClick}/>
-			    <div id="main-wrapper">
-					<div className="container">
-						<div className="row gtr-200">
-							<div className="col-8 col-12-medium">
-								<div id="content">
-									<article>
-										<div className="container">
-											<div className="recipe-inner-container-1">	
-												<AvatarTitle 
-													icon={<RestaurantMenu />}
-													heading="Recipe Name"
-												/>
-											</div>
-											<div className="recipe-inner-container-2">
-												<TextWrapper ref={this.dishName} label="Recipe" />
-											</div>
-											
+							<div id="main-wrapper">
+							<div className="container">
+								<div className="row gtr-200">
+									<div className="col-8 col-12-medium">
+										<div id="content">
+											<article>
+												<div className="container">
+													<div className="recipe-inner-container-1">	
+														<AvatarTitle 
+															icon={<RestaurantMenu />}
+															heading="Recipe Name"
+														/>
+													</div>
+													<div className="recipe-inner-container-2">
+														<TextWrapper ref={this.dishName} label="Recipe" />
+													</div>
+													
+												</div>
+												<div className="container">
+													<div>
+														<AvatarTitle 
+															icon={<List/>}
+															heading="Steps"
+														/>
+													</div>
+													<div className="step-inner-container">
+													<Button 
+														variant="contained"
+														style={styles.button}
+														onClick={this.handleAddStep}
+													>
+														Add Step
+													</Button>
+													</div>
+												</div>
+												<DragDropRecipe ref={this.recipe}/>
+												<Button 
+													onClick={this.handleSave}
+													variant="contained"
+													style={styles.button}
+												>
+													Save Recipe
+												</Button>
+												<Button 
+													onClick={this.handleClear}
+													variant="contained"
+													style={styles.clearButton}
+												>
+													Clear
+												</Button>
+											</article>
 										</div>
-										<div className="container">
-											<div>
-												<AvatarTitle 
-													icon={<List/>}
-													heading="Steps"
-												/>
-											</div>
-											<div className="step-inner-container">
-											<Button 
-												variant="contained"
-												style={styles.button}
-												onClick={this.handleAddStep}
-											>
-												Add Step
-											</Button>
-											</div>
-										</div>
-										<DragDropRecipe ref={this.recipe}/>
-										<Button 
-											onClick={this.handleSave}
-											variant="contained"
-											style={styles.button}
-										>
-											Save Recipe
-										</Button>
-										<Button 
-											onClick={this.handleClear}
-											variant="contained"
-											style={styles.clearButton}
-										>
-											Clear
-										</Button>
-									</article>
+									</div>
+									<SelectIngredients ref={this.ingredientList}/>
 								</div>
 							</div>
-              <SelectIngredients ref={this.ingredientList}/>
 						</div>
 					</div>
-				</div>
-			</div>
         );
     }
 }

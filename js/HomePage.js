@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './containers/Header';
 import Banner from './containers/Banner';
 import RandomRecipeColumn from './containers/RandomRecipeColumn';
 
@@ -8,6 +7,7 @@ class HomePage extends React.Component {
         super(props);
         this.state = {
             recipe: [0, 1, 2].map(i => ({link: "", img: "", title: ""})),
+            selected: {link: "", img: "", title: ""}
         }
     }
 
@@ -31,14 +31,19 @@ class HomePage extends React.Component {
         return body;
     };
 
+    onSelectRecipe = idx => {
+        console.log(this.state.recipe[idx]);
+        this.setState({
+            selected: this.state.recipe[idx]
+        })
+    }
+
     render(){
-        console.log(this.state.recipe);
+        //console.log(this.state.recipe);
         return(
             <div id="page-wrapper">
-			    <Header onClick={this.props.onClick}/>
                 <Banner />
-                <RandomRecipeColumn recipe={this.state.recipe}/>
-				{/*<Footer />*/}
+                <RandomRecipeColumn onClick={this.onSelectRecipe} recipe={this.state.recipe}/>
 			</div>
         );
     }

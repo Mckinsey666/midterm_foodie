@@ -1,66 +1,36 @@
 import React from 'react';
-import HomePage from './HomePage';
-import RandomRecipePage from './RandomRecipePage';
-import CreateRecipePage from './CreateRecipePage';
-import SavedRecipePage from './SavedRecipePage';
+import LoginPage from './LoginPage';
+import Blog from './Blog';
+import { BrowserRouter } from 'react-router-dom';
 
 class App extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            render: 'home'
-        }
+    state = {
+        loggedIn: false,
+        username: ""
     }
 
-    onClickCreateRecipe = () => {
-        this.setState({
-            render: 'createrecipe',
-        });
-    };
+    loginRef = React.createRef();
 
-    onClickFeelingLucky = () => {
+    onLogin = () => {
         this.setState({
-            render: 'feelinglucky',
-        });
-    };
+            loggedIn: true,
+            username: this.loginRef.current.textRef.current.state.value,
+        })
+    }
 
-    onClickMyRecipe = () => {
+    onLogout = () => {
         this.setState({
-            render: 'myrecipe',
-        });
-    };
+            loggedIn: false
+        })
+    }
 
     render(){
-        console.log(this.state.render);
-        if(this.state.render == 'home'){
-            return (<HomePage 
-                onClick={{createrecipe: this.onClickCreateRecipe, 
-                feelinglucky: this.onClickFeelingLucky,
-                myrecipe: this.onClickMyRecipe}} 
-            />);
-        }
-        else if(this.state.render == 'createrecipe'){
-            //console.log("hi!!!");
-            return (<CreateRecipePage 
-                onClick={{createrecipe: this.onClickCreateRecipe, 
-                feelinglucky: this.onClickFeelingLucky,
-                myrecipe: this.onClickMyRecipe}} 
-            />);
-        }
-        else if(this.state.render == 'feelinglucky'){
-            return (<RandomRecipePage
-                onClick={{createrecipe: this.onClickCreateRecipe, 
-                feelinglucky: this.onClickFeelingLucky,
-                myrecipe: this.onClickMyRecipe}} 
-            />);
-        }
-        else if(this.state.render == 'myrecipe'){
-            return (<SavedRecipePage
-                onClick={{createrecipe: this.onClickCreateRecipe, 
-                feelinglucky: this.onClickFeelingLucky,
-                myrecipe: this.onClickMyRecipe}} 
-            />);
-        }
+        console.log(this.state);
+        return (
+            this.state.loggedIn ? 
+                <BrowserRouter><Blog onLogout={this.onLogout} username={this.state.username}/></BrowserRouter> : 
+                <LoginPage ref={this.loginRef} onLogin={this.onLogin}/>
+        );
     }
 }
 

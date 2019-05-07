@@ -20,8 +20,24 @@ class Banner extends React.Component {
 							</div>
 							<div className="col-5 col-12-medium">
 								<ul>
-									<li><a href="#" className="button large icon " style={styles.banner}>Create a Recipe</a></li>
-									<li><a href="#" className="button alt large" style={styles.banner}>Feeling Lucky</a></li>
+									<li>
+										<NavLink 
+											className="button large"
+											to="/createrecipe" 
+											style={styles.banner}
+										>
+											Create A Recipe
+										</NavLink>
+									</li>
+									<li>
+										<NavLink 
+											className="button alt large"
+											to="/feelinglucky" 
+											style={styles.banner}
+										>
+											Feeling Lucky
+										</NavLink>
+									</li>
 								</ul>
 							</div>
 						</div>
