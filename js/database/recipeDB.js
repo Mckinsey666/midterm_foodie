@@ -10,7 +10,7 @@ const RecipeSchema = new Schema({
 		type: Array,
 		required: [true, 'Ingredient field is required.']
     },
-    steps: {
+  	steps: {
         type: Array,
         required: [true, 'Steps field is required.']
 	},
@@ -18,6 +18,16 @@ const RecipeSchema = new Schema({
 		type: String,
 		required: [true, 'User field is required.']
 	},
+	stars: {
+		type: Number,
+	},
+	imgSrc: {
+		type: String
+	},
+	decompress: {
+		type: Boolean,
+		required: [true, 'Decompress field is required.']
+	}
 })
 
 // Creating a table within database with the defined schema

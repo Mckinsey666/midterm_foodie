@@ -2,9 +2,11 @@ import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import HomePage from './HomePage';
 import RecipePage from './RecipePage';
+import DbRecipePage from './DbRecipePage';
 import RandomRecipePage from './RandomRecipePage';
 import CreateRecipePage from './CreateRecipePage';
 import SavedRecipePage from './SavedRecipePage';
+import CookAlongPage from './CookAlongPage';
 import {Switch, Route, NavLink } from 'react-router-dom';
 
 const styles = {
@@ -15,7 +17,16 @@ const styles = {
     username: {
         marginLeft: "0.5em",
         fontSize: "2em"
-    }
+    },
+}
+
+
+const test = {
+    name: "haha",
+    steps: [["114123423541325jndsjfgsbkghbrghsrbghargahsrgharbgahrvglarvghaberhgabergearbgherberbghaerbrg", 1000], ["2", null], ["3", 3000]],
+    ingredients: ["1", "2", "3"],
+    user: "juju",
+    decompress: false
 }
 
 class Blog extends React.Component {
@@ -32,13 +43,40 @@ class Blog extends React.Component {
         this.setState({ open: false });
     };
 
+    componentDidMount(){
+        this.callBackend()
+        .then(res => {
+            console.log(res.reply);
+        })
+        .catch(err => console.log(err));
+    }
+
+    callBackend = async ()=>{
+        const payload = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({user: this.props.username})
+        };
+
+        const response = await fetch('/loggedIn', payload);
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message) 
+          }
+        return body;
+    };
+
     render(){
         return(
             <div>
                 <div id="header-wrapper" className="header">
                     <header id="header" className="container">
                         <div id="logo">
-                            <h1><NavLink to="/">Foodie</NavLink></h1>
+                            <h1 className="animated tada"><NavLink to="/">Foodie</NavLink></h1>
                             <span>Know Your Dishes. Create Your Recipes.</span>
                         </div>
                             <nav id="nav">
@@ -61,6 +99,10 @@ class Blog extends React.Component {
                 </div>
                 <Switch>
                     <Route 
+                        path="/cookalong"
+                        render={(props) => <CookAlongPage {...props} recipe={test} />}
+                    />
+                    <Route 
                         exact path="/" 
                         render={(props) => <HomePage {...props} ref={this.recipeRef}/>} 
                     />
@@ -80,8 +122,10 @@ class Blog extends React.Component {
                         path="/recipe" 
                         render={(props) => <RecipePage {...props} 
                             user={this.props.username} 
-                            item={this.recipeRef.current.state.selected}
                         />}
+                    />
+                    <Route path="/savedrecipe"
+                        render={(props) => <DbRecipePage {...props} user={this.props.username}/>}
                     />
                 </Switch>
                 <Snackbar
@@ -89,7 +133,6 @@ class Blog extends React.Component {
                         vertical: 'bottom',
                         horizontal: 'left',
                     }}
-                    style={styles.snackbar}
                     open={this.state.open}
                     autoHideDuration={3000}
                     onClose={this.closeSnackBar}

@@ -21,6 +21,7 @@ const styles = {
 		width: '100%',
         height: '100%',
         marginTop: "50px",
+        color: "rgb(155, 155, 155)",
 	},
     card: {
         width: "90%",
@@ -87,12 +88,24 @@ class RecipePage extends React.Component {
     }
     
 	handleSave = () => {
+        let title, imgUrl;
+        if(this.props.item) {
+            title = this.props.item.title;
+            imgUrl = this.props.item.img;
+        }
+        else {
+            title = this.props.location.item.title;
+            imgUrl = this.props.location.item.img;
+        }
+
 		const recipe = {
-            name: this.props.item.title,
+            name: title,
             ingredients: this.state.ingredients,
             steps: this.state.steps,
             stars: this.recipeRef.current.ratingRef.current.state.stars,
             user: this.props.user,
+            imgSrc: imgUrl,
+            decompress: false
         };
         this.sendRecipe(recipe).then(res => {
             console.log(res.content);
@@ -118,29 +131,18 @@ class RecipePage extends React.Component {
 	};
 
 
-    componentDidUpdate(){
-        if(this.state.steps.length > 0) return; // recipe loaded
-        //console.log(this.props.item);
-        this.callBackend()
-        .then(res => {
-            //console.log(res.content);
-            this.setState({
-                steps: res.content.steps,
-                ingredients: res.content.ingredients,
-                updated: true,
-            });
-        })
-        .catch(err => console.log(err));
-    }
-
     callBackend = async ()=>{
+        let link;
+        if(this.props.item) link = this.props.item.link;
+        else link = this.props.location.item.link;
+        console.log("link", link);
         const payload = {
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify({link: this.props.item.link}),
+            body: JSON.stringify({link: link}),
         };
         const response = await fetch('/getrecipe', payload);
         const body = await response.json();
@@ -152,11 +154,26 @@ class RecipePage extends React.Component {
     };
 
     render(){
-        console.log(this.props.item);
+        let item;
+        if(this.props.item) item = this.props.item;
+        else item = this.props.location.item;
+        
+        if(this.state.steps.length === 0){
+            this.callBackend()
+            .then(res => {
+                this.setState({
+                    steps: res.content.steps,
+                    ingredients: res.content.ingredients,
+                    updated: true,
+                });
+            })
+            .catch(err => console.log(err));
+        }
+        
         return(
             <div id="page-wrapper">
-			    <div id="main-wrapper">
-                    <RecipeTitle ref={this.recipeRef} name={this.props.item.title} img={this.props.item.img}/>
+			    <div id="main-wrapper" className="animated fadeIn delay-3s">
+                    <RecipeTitle ref={this.recipeRef} name={item.title} img={item.img}/>
 					<div className="container lower">
 						<div className="row gtr-200">
 							<div className="col-8 col-12-medium">

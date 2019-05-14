@@ -1,4 +1,4 @@
-import * as utils from './js/utils.js';
+import * as scrapeUtils from './js/utils/scrapeUtils';
 const mongoose = require('mongoose');
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -6,21 +6,28 @@ const RecipeDB = require("./js/database/recipeDB");
 
 let app = express();
 const PORT = 3001;
+let user;
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static('public'));
 
 app.listen(PORT, () => console.log("app listening on port " + PORT.toString()));
 
 
+app.post('/loggedIn', (req, res) => {
+    user = req.body.user;
+    console.log("Successfully logged in as", user);
+})
+
 app.get('/scrape', (req, res) => {
     let content = [];
-    utils.getRandomRecipe().then(recipe => {
+    scrapeUtils.getRandomRecipe().then(recipe => {
         content.push(recipe);
-        utils.getRandomRecipe().then(recipe => {
+        scrapeUtils.getRandomRecipe().then(recipe => {
             content.push(recipe);
-            utils.getRandomRecipe().then(recipe => {
+            scrapeUtils.getRandomRecipe().then(recipe => {
                 content.push(recipe);
                 res.send({recipe: content})
             })
@@ -31,7 +38,7 @@ app.get('/scrape', (req, res) => {
 
 app.post('/getrecipe', (req, res) => {
     //console.log(req.body);
-    utils.parseRecipes(req.body.link).then(content => {
+    scrapeUtils.parseRecipes(req.body.link).then(content => {
         res.send({content: content});
     });
 })
@@ -39,7 +46,7 @@ app.post('/getrecipe', (req, res) => {
 // MongoDB connection
 
 
-mongoose.connect('mongodb+srv://Mckinsey666:doodlebean123@webmidterm-hnka6.gcp.mongodb.net/test?retryWrites=true', {
+mongoose.connect('mongodb+srv://server:12345@webmidterm-hnka6.gcp.mongodb.net/test?retryWrites=true', {
     useNewUrlParser: true
 })
 
@@ -53,25 +60,34 @@ db.on('error', error => {
 db.once('open', () => {
     console.log("MongoDB connected!");
 
+    //RecipeDB.collection.drop();
+
     RecipeDB.find().exec((err, res) => {
         if(err) console.log(err);
-        console.log(res);
+        console.log(res.length);
     });
 
-    app.get('/addrecipe', (req, res) => {
-        console.log("hi!");
+    app.get('/loadRecipes', (req, res) => {
+        RecipeDB.find({user: user}).exec((err, content) => {
+            if(err) console.log(err);
+            res.send({data: content});
+        });
+    })
+
+    app.post('/addrecipe', (req, res) => {
+        console.log(req.body);
         res.send({content: "Recipe Added!"});
+        const recipe = new RecipeDB(req.body);
+        recipe.save(err => {
+            if(err) console.log(err);
+            else console.log("Successfully saved!");
+        })
     });
 });
 
-
-app.post('/addrecipe', (req, res) => {
-    console.log(req.body);
-    res.send({content: "Recipe Added!"});
-});
 
 app.get('/getrandomrecipe', (req, res) => {
-    utils.getRandomRecipe().then(content => {
+    scrapeUtils.getRandomRecipe().then(content => {
         console.log(content);
         res.send({recipe: content})
     }).catch(err => console.log(err));

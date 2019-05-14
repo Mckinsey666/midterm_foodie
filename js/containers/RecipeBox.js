@@ -11,13 +11,19 @@ const styles = {
         fontWeight: '1',
 		backgroundColor: 'rgb(234, 236, 239)',
 		fontFamily: "Bree Serif"
-    },
+	},
+	link: {
+		textDecoration: 'none',
+		color: 'rgb(151, 152, 153)',
+		width: '100%',
+		fontFamily: 'Open Sans'
+	}
 }
 class RecipeBox extends React.Component {
     render(){
         return(
             <div className="col-4 col-12-medium">
-			    <section className="box feature">
+			    <section className="box feature animated fadeIn delay-5s">
 					<a href="#" className="image featured"><img src={this.props.item.img} alt="" /></a>
 					<div style={styles.box} className="inner">
 						<header>
@@ -38,9 +44,8 @@ class RecipeBox extends React.Component {
 						<Button 
 							variant="contained"
 							style={styles.button}
-							onClick={this.props.onClick}
                         >
-                            <NavLink to="/recipe">View Recipe and Save</NavLink>
+                            <NavLink style={styles.link} to={{pathname: "/recipe", item:this.props.item}}>View Recipe and Save</NavLink>
                         </Button>
 					</div>
 				</section>

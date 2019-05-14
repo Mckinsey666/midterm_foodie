@@ -6,6 +6,8 @@ import {List, RestaurantMenu} from '@material-ui/icons';
 import AvatarTitle from './containers/AvatarTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import PopOutImage from './containers/PopOutImage';
+import LZString from 'lz-string';
 
 
 const styles = {
@@ -17,6 +19,7 @@ const styles = {
 		backgroundColor: 'rgb(239, 239, 237)',
 		width: '100%',
 		height: '100%',
+		color: "rgb(155, 155, 155)",
 	},
 	clearButton: {
 		fontWeight: '10',
@@ -25,12 +28,21 @@ const styles = {
 		color: "white",
 		width: '100%',
 		height: '100%',
+		color: "white",
 	},
 	bigButton: {
 		fontWeight: '1',
 		backgroundColor: 'rgb(239, 239, 237)',
+		color: "rgb(155, 155, 155)",
 		width: '100%',
-	}
+	},
+	uploadButton: {
+    fontWeight: '1',
+		backgroundColor: 'rgb(239, 239, 237)',
+		width: '100%',
+		marginBottom: '5%',
+		color: "rgb(155, 155, 155)",
+	},
 }
 
 class TextWrapper extends React.Component {
@@ -71,6 +83,10 @@ class CreateRecipePage extends React.Component {
 		this.dishName = React.createRef();
 		this.state = {
 			uid: 0,
+			imageFilename: "",
+			imageUrl: "",
+			imageOpen: false,
+			dataUrl: ""
 		}
 	}
 
@@ -111,11 +127,11 @@ class CreateRecipePage extends React.Component {
 			ingredients: ingredients,
 			steps: steps,
 			user: this.props.user,
+			imgSrc: this.state.dataUrl,
+			decompress: true
 		}
 		this.callBackend(recipe)
-			.then(res => {
-				console.log(res.content);
-			})
+			.then(res => {})
 			.catch(err => console.log(err));
 	}
 
@@ -137,6 +153,34 @@ class CreateRecipePage extends React.Component {
 		return body;
 	};
 
+	onUpload = event => {
+		const file = event.target.files[0];
+		this.setState({
+			imageFilename: file.name,
+			imageUrl: URL.createObjectURL(file),
+			imageOpen: true
+		})
+		const reader = new FileReader();
+		reader.addEventListener("load", () => {
+			this.setState({
+				dataUrl: reader.result,
+			});
+		})
+		reader.readAsDataURL(file);
+	}
+
+	hideImage = () => {
+		this.setState({
+				imageOpen: false
+		})
+	}
+
+	showImage = () => {
+		this.setState({
+			imageOpen: true
+		})
+	}
+
     render(){
         return(
             <div id="page-wrapper">
@@ -156,8 +200,38 @@ class CreateRecipePage extends React.Component {
 													<div className="recipe-inner-container-2">
 														<TextWrapper ref={this.dishName} label="Recipe" />
 													</div>
-													
 												</div>
+												<div style={{display:"flex", width: "100%"}}>
+													<div style={{width:"30%"}}>
+														<input
+															accept="image/*"
+															style={{ display: 'none' }}
+															id="raised-button-file"
+															type="file"
+															onChange={this.onUpload}
+														/>
+														<label htmlFor="raised-button-file">
+															<Button 
+																variant="contained" 
+																component="span"
+																style={styles.uploadButton}
+															>
+																Upload Image
+															</Button>
+														</label> 
+													</div>
+													<div 
+														style={{width:"60%", marginLeft: "auto", textAlign: "right", cursor:"pointer"}}
+														onClick={this.showImage}
+													>
+														{this.state.imageFilename}
+													</div>
+												</div>
+												<PopOutImage 
+													open={this.state.imageOpen} 
+													src={this.state.imageUrl} 
+													handleClose={this.hideImage}
+												/>
 												<div className="container">
 													<div>
 														<AvatarTitle 

@@ -25,7 +25,8 @@ const styles = {
     button: {
         width: '100%',
         fontWeight: '1',
-        backgroundColor: 'rgb(239, 239, 237)'
+        backgroundColor: 'rgb(239, 239, 237)',
+        color: "rgb(155, 155, 155)",
     },
     card: {
         height: "60px",

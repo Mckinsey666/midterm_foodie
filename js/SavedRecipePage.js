@@ -9,7 +9,7 @@ import FoodIcon from '@material-ui/icons/RestaurantMenu';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import AvatarTitle from './containers/AvatarTitle';
-import * as utils from './utils.js';
+import { NavLink } from 'react-router-dom';
 
 const styles = {
     card: {
@@ -35,7 +35,14 @@ const styles = {
     },
     buttonContainer: {
         marginLeft: "auto"
-    }
+    },
+    link: {
+		textDecoration: 'none',
+		color: 'rgb(151, 152, 153)',
+		width: '100%',
+        fontFamily: 'Open Sans',
+        fontWeight: '1'
+	}
 }
 
 function RecipeItem(props){
@@ -46,14 +53,14 @@ function RecipeItem(props){
                     <div className="ingredient-container">
                         <FoodIcon />
                         <div style={styles.textContainer}>
-                            <Typography style={styles.itemText}>{props.item}</Typography>
+                            <Typography style={styles.itemText}>{props.item.name}</Typography>
                         </div>
                         <div style={styles.buttonContainer}>
                             <Button 
                                 variant="contained"
                                 style={styles.button}
                             >
-                                View
+                                <NavLink style={styles.link} to={{pathname: "/savedrecipe", recipe:props.item}}>View</NavLink>
                             </Button>
                         </div>
                     </div>
@@ -63,7 +70,32 @@ function RecipeItem(props){
     );
 }
 
-class HomePage extends React.Component {
+class SavedRecipePage extends React.Component {
+    state = {
+        data: []
+    }
+
+    componentDidMount(){
+        this.loadFromDataBase()
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    data: res.data
+                });
+            })
+            .catch(err => console.log(err));
+    }
+
+    loadFromDataBase = async () => {
+        const response = await fetch('/loadRecipes');
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message) 
+          }
+        return body;
+    }
+
     render(){
         return(
             <div id="page-wrapper">
@@ -73,7 +105,7 @@ class HomePage extends React.Component {
 							<article>
                                 <AvatarTitle heading="Saved Recipes" icon={<ListIcon />}/>
                                 <List style={{maxHeight: "300px", overflow: 'auto'}}>
-                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, idx)=>(
+                                    {this.state.data.map((item, idx)=>(
                                         <RecipeItem item={item} index={idx+1} key={idx} />
                                     ))}
                                 </List>
@@ -86,4 +118,4 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+export default SavedRecipePage;

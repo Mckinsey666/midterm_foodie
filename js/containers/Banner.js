@@ -14,7 +14,7 @@ class Banner extends React.Component {
                 <div id="banner-wrapper">
 					<div id="banner" className="box container">
 						<div className="row">
-							<div className="col-7 col-12-medium">
+							<div className="col-7 col-12-medium animated zoomIn delay-2s">
 								<h2>This is Foodie.</h2>
 								<p>Find recipes, cook-alongs, or create your own dishes!</p>
 							</div>
@@ -22,7 +22,7 @@ class Banner extends React.Component {
 								<ul>
 									<li>
 										<NavLink 
-											className="button large"
+											className="button large animated flipInX delay-2s"
 											to="/createrecipe" 
 											style={styles.banner}
 										>
@@ -31,7 +31,7 @@ class Banner extends React.Component {
 									</li>
 									<li>
 										<NavLink 
-											className="button alt large"
+											className="button alt large animated flipInX delay-2s"
 											to="/feelinglucky" 
 											style={styles.banner}
 										>

@@ -6,16 +6,26 @@ import { BrowserRouter } from 'react-router-dom';
 class App extends React.Component {
     state = {
         loggedIn: false,
-        username: ""
+        username: "",
+        warning: false
     }
 
     loginRef = React.createRef();
 
     onLogin = () => {
-        this.setState({
-            loggedIn: true,
-            username: this.loginRef.current.textRef.current.state.value,
-        })
+        const username = this.loginRef.current.textRef.current.state.value;
+        if(username != ""){
+            this.setState({
+                loggedIn: true,
+                username: username,
+                warning: false
+            })
+        }
+        else{
+            this.setState({
+                warning: true
+            })
+        }
     }
 
     onLogout = () => {
@@ -29,7 +39,7 @@ class App extends React.Component {
         return (
             this.state.loggedIn ? 
                 <BrowserRouter><Blog onLogout={this.onLogout} username={this.state.username}/></BrowserRouter> : 
-                <LoginPage ref={this.loginRef} onLogin={this.onLogin}/>
+                <LoginPage ref={this.loginRef} warning={this.state.warning} onLogin={this.onLogin}/>
         );
     }
 }

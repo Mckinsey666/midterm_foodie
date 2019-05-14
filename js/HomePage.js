@@ -31,19 +31,12 @@ class HomePage extends React.Component {
         return body;
     };
 
-    onSelectRecipe = idx => {
-        console.log(this.state.recipe[idx]);
-        this.setState({
-            selected: this.state.recipe[idx]
-        })
-    }
-
     render(){
         //console.log(this.state.recipe);
         return(
             <div id="page-wrapper">
                 <Banner />
-                <RandomRecipeColumn onClick={this.onSelectRecipe} recipe={this.state.recipe}/>
+                <RandomRecipeColumn recipe={this.state.recipe}/>
 			</div>
         );
     }

@@ -7,9 +7,9 @@ class RandomRecipeColumn extends React.Component {
             <div id="features-wrapper">
 				<div className="container">
 					<div className="row">
-						<RecipeBox onClick={() => this.props.onClick(0)} item={this.props.recipe[0]}/>
-                        <RecipeBox onClick={() => this.props.onClick(1)} item={this.props.recipe[1]}/>
-                        <RecipeBox onClick={() => this.props.onClick(2)} item={this.props.recipe[2]}/>
+						<RecipeBox item={this.props.recipe[0]}/>
+                        <RecipeBox item={this.props.recipe[1]}/>
+                        <RecipeBox item={this.props.recipe[2]}/>
 					</div>
 				</div>
 			</div>
