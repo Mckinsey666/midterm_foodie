@@ -83,7 +83,7 @@ db.once('open', () => {
                     if(err) console.log(err);
                     else console.log("New user added!");
                 });
-                res.send({content: "New user added!", warning: false});
+                res.send({content: 'User "' + req.body.user + '" successfully added!', warning: true});
             }
             else{
                 res.send({content: "User already exists!", warning: true});

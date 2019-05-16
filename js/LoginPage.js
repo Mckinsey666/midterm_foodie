@@ -225,6 +225,7 @@ class LoginPage extends React.Component {
                         vertical: 'bottom',
                         horizontal: 'left',
                     }}
+                    style={styles.snackbar}
                     open={this.state.warning}
                     autoHideDuration={3000}
                     onClose={this.closeSnackBar}
