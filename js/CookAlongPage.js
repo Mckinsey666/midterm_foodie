@@ -70,16 +70,18 @@ function Ingredient(props){
 }
 
 function Step(props){
+    let cardStyle = styles.card;
+    if(props.highlight) cardStyle = {...cardStyle, backgroundColor: "rgb(208, 221, 242)"};
     return(
         <div>
-            <Card style={styles.card}>
+            <Card style={cardStyle}>
                 <CardContent>
                     <div className="ingredient-container">
                         <div style={styles.stepContainer}>{props.item}</div>
                         {props.timer ? (<div style={styles.buttonContainer}>
                             <Button 
                                 style={styles.stepButton}
-                                onClick={() => props.onClick(props.item, props.timer)}
+                                onClick={() => props.onClick(props.item, props.timer, props.idx)}
                             >
                                 Cook-along
                             </Button>
@@ -122,7 +124,8 @@ class CookAlongPage extends React.Component {
         open: false,
         timerValue: 0,
         timerText: "",
-        timerClass: ""
+        timerClass: "",
+        highlightID: -1,
     }
 
     hideTimer = () => {
@@ -136,12 +139,13 @@ class CookAlongPage extends React.Component {
 
     }
     
-    openTimer = (timerText, timerValue) => {
+    openTimer = (timerText, timerValue, idx) => {
         this.setState({
             open: true,
             timerValue: timerValue,
             timerText: timerText,
             timerClass: "",
+            highlightID: idx
         })
     }
 
@@ -181,6 +185,8 @@ class CookAlongPage extends React.Component {
                                                     key={idx} 
                                                     onClick={this.openTimer} 
                                                     timer={item[1]}
+                                                    idx={idx}
+                                                    highlight={idx == this.state.highlightID}
                                                 />
                                             ))}
                                         </List>

@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 class App extends React.Component {
     state = {
-        loggedIn: false,
+        loggedIn: true,
         username: ""
     }
 

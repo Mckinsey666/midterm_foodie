@@ -98,7 +98,7 @@ class Blog extends React.Component {
                 </div>
                 <Switch>
                     <Route 
-                        exact path="/34234234"
+                        exact path="/"
                         render={(props) => <CookAlongPage {...props} recipe={test} />}
                     />
                     <Route 
