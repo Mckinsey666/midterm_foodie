@@ -23,10 +23,6 @@ const RecipeSchema = new Schema({
 	},
 	imgSrc: {
 		type: String
-	},
-	decompress: {
-		type: Boolean,
-		required: [true, 'Decompress field is required.']
 	}
 })
 

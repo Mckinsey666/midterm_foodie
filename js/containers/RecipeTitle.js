@@ -21,7 +21,7 @@ class RecipeTitle extends React.Component {
 						<div style={{position: "relative"}} className="col-7 col-12-medium">
 							<h2>{this.props.name}</h2>
 							<Divider style={{width: "500px"}}/>
-							<RatingWrapper ref={this.ratingRef}/>
+							<RatingWrapper initial={this.props.stars} ref={this.ratingRef}/>
 						</div>
 						<div className="right-align col-5 col-12-medium">
 							<img className="recipe-image" src={this.props.img} />

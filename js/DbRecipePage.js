@@ -83,6 +83,7 @@ class DbRecipePage extends React.Component {
                     <RecipeTitle 
                         name={this.props.location.recipe.name} 
                         img={this.props.location.recipe.imgSrc}
+                        stars={this.props.location.recipe.stars}
                     />
 					<div className="container lower">
 						<div className="row gtr-200">
@@ -93,7 +94,7 @@ class DbRecipePage extends React.Component {
 											<div>
 												<AvatarTitle 
 													icon={<ListIcon/>}
-													heading="Steps"
+                                                    heading="Steps"
 												/>
 											</div>
 										</div>

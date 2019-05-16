@@ -104,8 +104,7 @@ class RecipePage extends React.Component {
             steps: this.state.steps,
             stars: this.recipeRef.current.ratingRef.current.state.stars,
             user: this.props.user,
-            imgSrc: imgUrl,
-            decompress: false
+            imgSrc: imgUrl
         };
         this.sendRecipe(recipe).then(res => {
             console.log(res.content);

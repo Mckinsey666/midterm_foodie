@@ -25,8 +25,7 @@ const test = {
     name: "haha",
     steps: [["114123423541325jndsjfgsbkghbrghsrbghargahsrgharbgahrvglarvghaberhgabergearbgherberbghaerbrg", 1000], ["2", null], ["3", 3000]],
     ingredients: ["1", "2", "3"],
-    user: "juju",
-    decompress: false
+    user: "juju"
 }
 
 class Blog extends React.Component {
@@ -99,7 +98,7 @@ class Blog extends React.Component {
                 </div>
                 <Switch>
                     <Route 
-                        path="/cookalong"
+                        exact path="/34234234"
                         render={(props) => <CookAlongPage {...props} recipe={test} />}
                     />
                     <Route 

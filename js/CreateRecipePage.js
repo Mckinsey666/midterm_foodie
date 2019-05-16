@@ -124,11 +124,11 @@ class CreateRecipePage extends React.Component {
 		const name = this.dishName.current.state.value;
 		const recipe = {
 			name: name,
-			ingredients: ingredients,
+			ingredients: ingredients.map(({ingredient, quantity, id}) => (ingredient + ", " + quantity.toString())),
 			steps: steps,
 			user: this.props.user,
 			imgSrc: this.state.dataUrl,
-			decompress: true
+			stars: 0,
 		}
 		this.callBackend(recipe)
 			.then(res => {})

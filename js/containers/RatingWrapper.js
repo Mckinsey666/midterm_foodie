@@ -6,7 +6,7 @@ class RatingWrapper extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            stars: 0
+            stars: this.props.initial
         }
     }
 

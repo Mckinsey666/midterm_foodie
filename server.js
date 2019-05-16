@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const express = require("express");
 const bodyParser = require('body-parser');
 const RecipeDB = require("./js/database/recipeDB");
+const PasswordDB = require("./js/database/passwordDB");
 
 let app = express();
 const PORT = 3001;
@@ -60,12 +61,49 @@ db.on('error', error => {
 db.once('open', () => {
     console.log("MongoDB connected!");
 
-    //RecipeDB.collection.drop();
+    RecipeDB.collection.drop();
+    //PasswordDB.collection.drop();
 
     RecipeDB.find().exec((err, res) => {
         if(err) console.log(err);
         console.log(res.length);
     });
+
+    PasswordDB.find((err, res) => {
+        if(err) console.log(err);
+        console.log(res);
+    })
+
+    app.post('/register', (req, res) => {
+        PasswordDB.find({user: req.body.user}).exec((err, content) => {
+            if(err) console.log(err);
+            if(content.length == 0){
+                const newUser = new PasswordDB(req.body);
+                newUser.save(err => {
+                    if(err) console.log(err);
+                    else console.log("New user added!");
+                });
+                res.send({content: "New user added!", warning: false});
+            }
+            else{
+                res.send({content: "User already exists!", warning: true});
+            }
+        })
+    })
+
+    app.post('/login', (req, res) => {
+        PasswordDB.find({user: req.body.user}).exec((err, content) => {
+            if(err) console.log(err);
+            if(content.length == 0){
+                res.send({warning: true, content: "User not found! Please first register."});
+            }
+            else{
+                const account = content[0];
+                if(account.password != req.body.password) res.send({warning: true, content: "Wrong password!"});
+                else res.send({warning: false, content: "Successfully logged in!"});
+            }
+        })
+    })
 
     app.get('/loadRecipes', (req, res) => {
         RecipeDB.find({user: user}).exec((err, content) => {

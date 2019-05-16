@@ -130,7 +130,7 @@
 {
     width: 40%;
     margin: 0 auto;
-    margin-top: 150px;
+    margin-top: 250px;
     height: 200px;
     background: #ff4486;
 	color: #fff;
@@ -150,5 +150,10 @@
     width: 40%;
     margin: 0 auto;
     display: flex;
+    margin-bottom: 7px;
+}
+
+.login-field{
     margin-top: 20px;
+    margin-bottom: 0px;
 }
