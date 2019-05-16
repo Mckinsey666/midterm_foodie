@@ -84,12 +84,15 @@ I used the components library **material-ui** and **React** for frontend develop
 1. **react-beautiful-dnd**
 2. **react-clock**
 
-For animations, I used **animate.css**.
+For animations, I used the powerful **animate.css** library.
 
 ## Backend 
 
 - For database management, I used **mongoose** which is a client library for **MongoDb**
+    - There are two tables in the database: one for saving recipes, and one for username-password lookup.
 - For web-scraping, I used **cheerio.js** with **request-promise**.
+- User authentication 
+    - The password entered is first hashed in the client-side using *sha-256* in the **sjcl.js** crypto library developed by Stannford University. The hash string is stored in the database for username-password pair lookup.
 
 ## Frontend-Backend Interaction
 
