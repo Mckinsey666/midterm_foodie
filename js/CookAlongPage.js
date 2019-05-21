@@ -120,12 +120,19 @@ function StaticIngredient(props) {
 
 
 class CookAlongPage extends React.Component {
-    state = {
-        open: false,
-        timerValue: 0,
-        timerText: "",
-        timerClass: "",
-        highlightID: -1,
+    constructor(props){
+        super(props);
+        this.state = {
+            open: false,
+            timerValue: 0,
+            timerText: "",
+            timerClass: "",
+            highlightID: -1,
+        }
+        this.indices = [];
+        for(let i = 0; i < this.props.location.recipe.steps.length; ++i){
+            this.indices.push(i);
+        }
     }
 
     hideTimer = () => {
@@ -133,10 +140,6 @@ class CookAlongPage extends React.Component {
             open: false,
             timerClass: ""
         })
-    }
-
-    autoClose = value => {
-
     }
     
     openTimer = (timerText, timerValue, idx) => {
@@ -162,8 +165,8 @@ class CookAlongPage extends React.Component {
             <div id="page-wrapper">
 			    <div id="main-wrapper">
                     <RecipeTitle 
-                        name={this.props.recipe.name} 
-                        img={this.props.recipe.imgSrc}
+                        name={this.props.location.recipe.name} 
+                        img={this.props.location.recipe.imgSrc}
                     />
 					<div className="container lower">
 						<div className="row gtr-200">
@@ -179,12 +182,12 @@ class CookAlongPage extends React.Component {
 											</div>
 										</div>
                                         <List style={{maxHeight: "500px", overflow: 'auto'}}>
-                                            {this.props.recipe.steps.map((item, idx)=>(
+                                            {this.indices.map(idx =>(
                                                 <Step 
-                                                    item={item[0]} 
+                                                    item={this.props.location.recipe.steps[idx]} 
                                                     key={idx} 
                                                     onClick={this.openTimer} 
-                                                    timer={item[1]}
+                                                    timer={this.props.location.recipe.times[idx]}
                                                     idx={idx}
                                                     highlight={idx == this.state.highlightID}
                                                 />
@@ -193,10 +196,9 @@ class CookAlongPage extends React.Component {
 									</article>
 								</div>
 							</div>
-                            <StaticIngredient list={this.props.recipe.ingredients}/>
+                            <StaticIngredient list={this.props.location.recipe.ingredients}/>
                             <PopOutTimer
-                                open={this.state.open} 
-                                autoClose={this.autoClose}
+                                open={this.state.open}
                                 handleClose={this.hideTimer} 
                                 onFinish={this.onFinish}
                                 countdown={this.state.timerValue}

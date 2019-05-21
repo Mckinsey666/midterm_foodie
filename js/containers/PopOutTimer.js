@@ -74,8 +74,7 @@ class PopOutTimer extends React.Component {
                     <div style={styles.rightContainer}>
                         <div style={styles.countDownContainer}>
                             <CountDown
-                                initial={this.props.countdown} 
-                                autoClose={this.props.autoClose}
+                                initial={this.props.countdown}
                                 onFinish={this.props.onFinish}
                             />
                         </div>

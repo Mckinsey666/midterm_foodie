@@ -62,7 +62,7 @@ db.once('open', () => {
     console.log("MongoDB connected!");
 
     RecipeDB.collection.drop();
-    //PasswordDB.collection.drop();
+    PasswordDB.collection.drop();
 
     RecipeDB.find().exec((err, res) => {
         if(err) console.log(err);

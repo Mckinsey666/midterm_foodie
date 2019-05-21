@@ -98,18 +98,18 @@ class Blog extends React.Component {
                 </div>
                 <Switch>
                     <Route 
-                        exact path="/"
-                        render={(props) => <CookAlongPage {...props} recipe={test} />}
-                    />
-                    <Route 
                         exact path="/" 
                         render={(props) => <HomePage {...props} ref={this.recipeRef}/>} 
+                    />
+                    <Route
+                        path="/cookalong"
+                        render={(props) => <CookAlongPage {...props} user={this.props.username} />}
                     />
                     <Route 
                         path="/myrecipe" 
                         render={(props) => <SavedRecipePage {...props} user={this.props.username}/>}
                     />
-                    <Route 
+                    <Route
                         path="/createrecipe"
                         render={(props) => <CreateRecipePage {...props} user={this.props.username}/>}
                     />
@@ -119,12 +119,7 @@ class Blog extends React.Component {
                     />
                     <Route 
                         path="/recipe" 
-                        render={(props) => <RecipePage {...props} 
-                            user={this.props.username} 
-                        />}
-                    />
-                    <Route path="/savedrecipe"
-                        render={(props) => <DbRecipePage {...props} user={this.props.username}/>}
+                        render={(props) => <RecipePage {...props} user={this.props.username} />}
                     />
                 </Switch>
                 <Snackbar

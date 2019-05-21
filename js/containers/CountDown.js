@@ -28,7 +28,6 @@ class CountDown extends React.Component {
     componentDidMount(){
         this.interval = setInterval(() => this.setState(prevState => {
             const newValue = ((prevState.value > delta) ? prevState.value - delta : 0);
-            this.props.autoClose(newValue);
             this.props.onFinish(newValue);
             return {value: newValue};
         }), delta);

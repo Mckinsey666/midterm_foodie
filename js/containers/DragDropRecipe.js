@@ -3,6 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SwapIcon from '@material-ui/icons/SwapVert';
+import TimeSelector from './TimeSelector';
 import IconButton from '@material-ui/core/IconButton';
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -22,15 +23,21 @@ const styles = {
   },
   textContainer: {
     marginLeft:"5%",
-    width: "60%",
+    width: "45%",
+  },
+  timeContainer: {
+    width: "25%",
+    marginLeft: "auto",
+    marginRight: "0",
   },
   buttonContainer: {
     marginLeft: "auto",
-    marginRight: "0"
+    marginRight: "0",
   },
   iconContainer: {
-    marginLeft: "15%"
-  }
+    marginLeft: "auto",
+    marginRight: "0",
+  },
 }
 
 // a little function to help us with reordering the result
@@ -86,6 +93,7 @@ class TextWrapper extends Component {
           style={styles.textField}
           value={this.state.value}
           onChange={this.handleChange}
+          multiline={true}
         />
       </div>
     );
@@ -98,6 +106,7 @@ class DragDropRecipe extends Component {
     this.state = {
       items: [],
       refs: [],
+      times: []
     };
     this.onDragEnd = this.onDragEnd.bind(this);
   }
@@ -106,6 +115,7 @@ class DragDropRecipe extends Component {
     this.setState(prevState => ({
       items: prevState.items.filter((_, i) => i != idx),
       refs: prevState.refs.filter((_, i) => i != idx),
+      times: prevState.times.filter((_, i) => i != idx),
     }));
   }
 
@@ -153,6 +163,7 @@ class DragDropRecipe extends Component {
                       <div style={styles.flexContainer}>
                         <div><Avatar style={styles.avatar}>{index+1}</Avatar></div>
                         <div style={styles.textContainer}><TextWrapper ref={this.state.refs[index]}/></div>
+                        <div style={styles.timeContainer}> <TimeSelector ref={this.state.times[index]}/> </div>
                         <div style={styles.iconContainer}><Avatar><SwapIcon /></Avatar></div>
                         <div style={styles.buttonContainer}>
                           <IconButton onClick={() => this.handleDelete(index)}>

@@ -23,6 +23,9 @@ const RecipeSchema = new Schema({
 	},
 	imgSrc: {
 		type: String
+	},
+	times: {
+		type: Array
 	}
 })
 

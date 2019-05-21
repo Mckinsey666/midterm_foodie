@@ -60,7 +60,7 @@ function RecipeItem(props){
                                 variant="contained"
                                 style={styles.button}
                             >
-                                <NavLink style={styles.link} to={{pathname: "/savedrecipe", recipe:props.item}}>View</NavLink>
+                                <NavLink style={styles.link} to={{pathname: "/cookalong", recipe:props.item}}>View</NavLink>
                             </Button>
                         </div>
                     </div>

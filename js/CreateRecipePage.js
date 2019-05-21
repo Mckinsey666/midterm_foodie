@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './containers/Header';
 import DragDropRecipe from './containers/DragDropRecipe';
 import SelectIngredients from './containers/SelectIngredients';
 import {List, RestaurantMenu} from '@material-ui/icons';
@@ -7,7 +6,6 @@ import AvatarTitle from './containers/AvatarTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PopOutImage from './containers/PopOutImage';
-import LZString from 'lz-string';
 
 
 const styles = {
@@ -86,7 +84,7 @@ class CreateRecipePage extends React.Component {
 			imageFilename: "",
 			imageUrl: "",
 			imageOpen: false,
-			dataUrl: ""
+			dataUrl: "",
 		}
 	}
 
@@ -96,6 +94,7 @@ class CreateRecipePage extends React.Component {
 		recipeRef.setState(prevState => ({
 			items: [...prevState.items, {id: `item-${this.state.uid}`}],
 			refs: [...prevState.refs, React.createRef()],
+			times: [...prevState.times, React.createRef()],
 		}))
 		this.setState(prevState => ({
 			uid: prevState.uid + 1,
@@ -114,12 +113,27 @@ class CreateRecipePage extends React.Component {
 		});
 		this.recipe.current.setState({
 			items: [],
-			refs: []
+			refs: [],
+			times: []
 		});
 	}
 
 	handleSave = () => {
-		const steps = this.recipe.current.state.refs.map(item => item.current.state.value).filter(item => item != "");
+		const indices = [];
+		this.recipe.current.state.refs.map(item => item.current.state.value).forEach((item, idx) => {
+			if(item != "") indices.push(idx);
+		})
+		const steps = indices.map(idx => this.recipe.current.state.refs[idx].current.state.value);
+		const hms = indices.map(idx => this.recipe.current.state.times[idx].current.state);
+		const times = hms.map(
+			item => {
+				let t = 0;
+				if(item.hour != "") t += 3600 * parseInt(item.hour);
+				if(item.minute != "") t += 60 * parseInt(item.minute);
+				if(item.second != "") t += parseInt(item.second);
+				return ((t == 0) ? null : (1000 * t));
+			}
+		);
 		const ingredients = this.ingredientList.current.state.list.filter(item => item.ingredient != "");
 		const name = this.dishName.current.state.value;
 		const recipe = {
@@ -129,7 +143,9 @@ class CreateRecipePage extends React.Component {
 			user: this.props.user,
 			imgSrc: this.state.dataUrl,
 			stars: 0,
+			times: times,
 		}
+		console.log(times);
 		this.callBackend(recipe)
 			.then(res => {})
 			.catch(err => console.log(err));
@@ -249,7 +265,7 @@ class CreateRecipePage extends React.Component {
 													</Button>
 													</div>
 												</div>
-												<DragDropRecipe ref={this.recipe}/>
+												<DragDropRecipe handleAddTime={this.handleAddTime} ref={this.recipe}/>
 												<Button 
 													onClick={this.handleSave}
 													variant="contained"
