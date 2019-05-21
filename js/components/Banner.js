@@ -1,5 +1,4 @@
 import React from 'react';
-import CreateRecipePage from '../CreateRecipePage';
 import { NavLink, Switch, Route } from 'react-router-dom'
 
 const styles = {

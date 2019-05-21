@@ -1,6 +1,6 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
-import RatingWrapper from './RatingWrapper';
+import RatingWrapper from '../containers/RatingWrapper';
 
 const styles = {
 	banner: {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Banner from './containers/Banner';
-import RandomRecipeColumn from './containers/RandomRecipeColumn';
+import Banner from '../components/Banner';
+import RandomRecipeColumn from '../components/RandomRecipeColumn';
 
 class HomePage extends React.Component {
     constructor(props){

@@ -1,11 +1,11 @@
 import React from 'react';
-import DragDropRecipe from './containers/DragDropRecipe';
-import SelectIngredients from './containers/SelectIngredients';
+import DragDropRecipe from '../containers/DragDropRecipe';
+import SelectIngredients from '../containers/SelectIngredients';
 import {List, RestaurantMenu} from '@material-ui/icons';
-import AvatarTitle from './containers/AvatarTitle';
+import AvatarTitle from '../components/AvatarTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import PopOutImage from './containers/PopOutImage';
+import PopOutImage from '../components/PopOutImage';
 
 
 const styles = {

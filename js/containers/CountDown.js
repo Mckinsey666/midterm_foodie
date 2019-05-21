@@ -3,9 +3,6 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 
 const delta = 1000;
 
-const styles = {
-}
-
 function CardWrapper(props){
     return (
         <div>

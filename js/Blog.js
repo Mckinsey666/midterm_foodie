@@ -1,12 +1,11 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import HomePage from './HomePage';
-import RecipePage from './RecipePage';
-import DbRecipePage from './DbRecipePage';
-import RandomRecipePage from './RandomRecipePage';
-import CreateRecipePage from './CreateRecipePage';
-import SavedRecipePage from './SavedRecipePage';
-import CookAlongPage from './CookAlongPage';
+import HomePage from './pages/HomePage';
+import RecipePage from './pages/RecipePage';
+import RandomRecipePage from './pages/RandomRecipePage';
+import CreateRecipePage from './pages/CreateRecipePage';
+import SavedRecipePage from './pages/SavedRecipePage';
+import CookAlongPage from './pages/CookAlongPage';
 import {Switch, Route, NavLink } from 'react-router-dom';
 
 const styles = {

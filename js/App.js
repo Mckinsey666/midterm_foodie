@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPage from './LoginPage';
+import LoginPage from './pages/LoginPage';
 import Blog from './Blog';
 import { BrowserRouter } from 'react-router-dom';
 
