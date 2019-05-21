@@ -14,6 +14,7 @@
 On the terminal (in the *midterm_foodie* folder):
 ```
 npm install
+npm run build
 npm start
 ```
 ## How to use this application
