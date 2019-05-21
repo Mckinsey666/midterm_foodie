@@ -10,15 +10,20 @@
 - Used async, await functions for asynchronous tasks (web scraping)
 - Used MongoDb for database management
 
+## Run locally
+On the terminal (in the *midterm_foodie* folder):
+```
+npm start
+```
 ## How to use this application
 > Take a glimpse of this application.
 
 ### Login
 
-Simple login page according to username.
+Simple login page with username and password field.
 <img src="./readme_assets/login_page.png">
 
-Click on the icon for a pop out explanation.
+Click on the icon for a pop out text explanation.
 <img src="./readme_assets/login_popout.png">
 
 ### Home Page
@@ -33,7 +38,7 @@ Take a look at the navigation bar, now you can:
 
 <img src="./readme_assets/home_page_2.png">
 
-The bottom column is three random recipes recommended for the user (the content is scraped online).
+The bottom column is three random recipes recommended for the user (the content is scraped online). You can get the original source by clicking on the logo.
 
 ### Create Your Recipe
 
@@ -44,7 +49,8 @@ There are several fields the for user input:
 1. Recipe Name: enter name of the recipe
 2. Upload Image: upload image for the recipe and preview.
 3. Recipe steps: add, delete, drag and drop steps for the recipe.
-4. Ingredients / Quantity: add or delete ingredients and quantity.
+4. Cooking time for each step: optional input field for cooking / prepare time.
+5. Ingredients / Quantity: add or delete ingredients and quantity.
 
 #### Upload an image
 <img src="./readme_assets/create_recipe_upload.png">
@@ -63,8 +69,16 @@ There are several fields the for user input:
 
 ### Lookup Saved Recipes
 
-You can view your previously saved recipes.
+You can view your previously saved recipes for cookalongs.
 <img src="./readme_assets/saved_recipe.png">
+
+### Cookalong Page
+Your saved recipes may contain cookalongs. 
+<img src="./readme_assets/saved_recipe_cookalong.png">
+
+Your can press the *cook along* button for a pop-out timer.
+<img src="./readme_assets/cookalong_popout.png">
+
 
 ### Get a Random Recipe
 
@@ -76,14 +90,15 @@ You can also rate the recipe.
 Press *save recipe* to save the recipe to the database.
 <img src="./readme_assets/recipe_2.png">
 
-## Project Development
+## Project Development 
 
 ## Frontend
 
 I used the components library **material-ui** and **React** for frontend development. Some other packages include:
 1. **react-beautiful-dnd**
 2. **react-clock**
-
+3. **react-router**
+  
 For animations, I used the powerful **animate.css** library.
 
 ## Backend 
@@ -97,3 +112,12 @@ For animations, I used the powerful **animate.css** library.
 ## Frontend-Backend Interaction
 
 The frontend uses the **fetch** method to send requests to the server (*server.js*), and the server uses **express** to handle client requests.
+
+## Wrapping it all up
+Used **webpack** to bundle files and **babel** to transpile files. 
+## My Contributions
+- Hand crafted all server-side code.
+- Developed frontend with pure html/css and component libraries.
+- Used MongoDB to store persistent data.
+- Linked frontend-backend with **express** and **fetch**.
+- Wrote a simple login system (not sure if it is safe though...).
