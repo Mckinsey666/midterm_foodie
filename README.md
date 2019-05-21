@@ -115,9 +115,12 @@ The frontend uses the **fetch** method to send requests to the server (*server.j
 
 ## Wrapping it all up
 Used **webpack** to bundle files and **babel** to transpile files. 
+
 ## My Contributions
 - Hand crafted all server-side code.
 - Developed frontend with pure html/css and component libraries.
 - Used MongoDB to store persistent data.
 - Linked frontend-backend with **express** and **fetch**.
 - Wrote a simple login system (not sure if it is safe though...).
+
+## My Thoughts on in this Project
