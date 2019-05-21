@@ -1,9 +1,9 @@
 import React from 'react';
 import {LocalDrink, RestaurantMenu} from '@material-ui/icons';
-import AvatarTitle from '../containers/AvatarTitle';
+import AvatarTitle from '../components/AvatarTitle';
 import RecipeTitle from '../containers/RecipeTitle';
 import List from '@material-ui/core/List';
-import ListIcPopOutTimeron from '@material-ui/icons/List';
+import ListIcon from '@material-ui/icons/List';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
