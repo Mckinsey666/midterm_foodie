@@ -34,9 +34,9 @@
     "sjcl": "^1.0.8"
   },
   "devDependencies": {
-    "@babel/node": "^7.2.2",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
