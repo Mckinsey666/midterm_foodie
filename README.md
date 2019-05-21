@@ -13,6 +13,7 @@
 ## Run locally
 On the terminal (in the *midterm_foodie* folder):
 ```
+npm install
 npm start
 ```
 ## How to use this application
@@ -118,9 +119,13 @@ Used **webpack** to bundle files and **babel** to transpile files.
 
 ## My Contributions
 - Hand crafted all server-side code.
+    - Request / Responses
+    - Image uploading
+    - Web scraping
 - Developed frontend with pure html/css and component libraries.
 - Used MongoDB to store persistent data.
 - Linked frontend-backend with **express** and **fetch**.
 - Wrote a simple login system (not sure if it is safe though...).
 
 ## My Thoughts on in this Project
+With no previous web-development experience, this is the first time I started a web-development project from scratch. I felt most satisfied when I finished the server side implementation since I had absolutely no idea what a "server" really is prior to enrolling in this course, but now I am comfortable with handling requests and responses. I also think that this project also provided great training in the field of software engineering since it involved massive amount of self-study, searching for documentations, and reading legacy code - each of which I feel is essential for a succesful software developer.
